@@ -1,18 +1,21 @@
+import axios from "axios";
+
 export function listIsLoading(bool: boolean) {
 	return {
 		type: "LIST_IS_LOADING",
 		isLoading: bool,
 	};
 }
-export function fetchListSuccess(list: Object) {
+export function fetchListSuccess(data: Object) {
 	return {
 		type: "FETCH_LIST_SUCCESS",
-		list,
+		data,
 	};
 }
 export function fetchList(url) {
-	return dispatch => {
-		dispatch(fetchListSuccess(url));
+	return async dispatch => {
+		let list = await axios.get(url);
+		dispatch(fetchListSuccess(list));
 		dispatch(listIsLoading(false));
 	};
 }

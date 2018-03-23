@@ -9,11 +9,11 @@ class Home extends React.Component {
                     React.createElement(Button, { transparent: true },
                         React.createElement(Icon, { active: true, name: "menu", onPress: () => this.props.navigation.navigate("DrawerOpen") }))),
                 React.createElement(Body, null,
-                    React.createElement(Title, null, "Home")),
+                    React.createElement(Title, null, "Top Reddit")),
                 React.createElement(Right, null)),
             React.createElement(Content, null,
-                React.createElement(List, null, this.props.list.map((item, i) => (React.createElement(ListItem, { key: i },
-                    React.createElement(Text, null, item))))))));
+                React.createElement(List, null, this.props.list.map((item, i) => (React.createElement(ListItem, { key: item.data.id },
+                    React.createElement(Text, null, item.data.title))))))));
     }
 }
 export default Home;

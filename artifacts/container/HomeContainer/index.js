@@ -1,23 +1,26 @@
-import * as React from "react";
+import React, { Component } from "react";
+import { Spinner } from "native-base";
 import { connect } from "react-redux";
 import Home from "../../stories/screens/Home";
 import { fetchList } from "./actions";
-class HomeContainer extends React.Component {
+class HomeContainer extends Component {
+    fetchPosts() {
+        this.props.fetchList(`https://www.reddit.com/top.json`);
+    }
     componentDidMount() {
-        this.props.fetchList([]);
+        this.fetchPosts();
     }
     render() {
-        return React.createElement(Home, { navigation: this.props.navigation, list: this.props.data });
+        if (this.props.isLoading) {
+            return (React.createElement(Spinner, null));
+        }
+        let { children } = this.props.data.data.data;
+        return React.createElement(Home, { navigation: this.props.navigation, list: children });
     }
 }
-function bindAction(dispatch) {
-    return {
-        fetchList: url => dispatch(fetchList(url)),
-    };
-}
 const mapStateToProps = state => ({
-    data: state.homeReducer.list,
+    data: state.homeReducer.data,
     isLoading: state.homeReducer.isLoading,
 });
-export default connect(mapStateToProps, bindAction)(HomeContainer);
+export default connect(mapStateToProps, { fetchList })(HomeContainer);
 //# sourceMappingURL=index.js.map

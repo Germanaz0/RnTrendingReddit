@@ -1,19 +1,7 @@
 
-## React Native Seed v1.0.0
+## React Native Reddit Client
 
-### A [React Native](https://facebook.github.io/react-native/docs/getting-started.html) Starter Kit with [NativeBase](https://nativebase.io/) + [React Navigation](https://reactnavigation.org/) + [Redux](https://github.com/reactjs/redux) Apps (iOS & Android)
-
-*Brought to you by [GeekyAnts](https://geekyants.com/)*
-
-
-## Get Started
-
-### 1. System Requirements
-
-* Globally installed [node](https://nodejs.org/en/)
-
-* Globally installed [react-native CLI](https://facebook.github.io/react-native/docs/getting-started.html)
-
+Simple reddit client written in React Native to use as example.
 
 ### 2. Installation
 
