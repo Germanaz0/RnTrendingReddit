@@ -55,6 +55,10 @@ class Home extends Component<Props, State> {
 			thumbnail = `https://www.gravatar.com/avatar/${id}?d=identicon&f=y`;
 		}
 
+		if (thumbnail === 'image') {
+			thumbnail = item.data.url;
+		}
+
 		let unreadDot = <View style={styles.unreadDot}/>;
 		if (!isUndefined(this.props.readed[id])) {
 			unreadDot = <View style={styles.readDot}/>;

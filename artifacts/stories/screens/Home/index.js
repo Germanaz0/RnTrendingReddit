@@ -22,6 +22,9 @@ class Home extends Component {
         if (thumbnail === "default" || thumbnail === "nsfw" || thumbnail === "self") {
             thumbnail = `https://www.gravatar.com/avatar/${id}?d=identicon&f=y`;
         }
+        if (thumbnail === 'image') {
+            thumbnail = item.data.url;
+        }
         let unreadDot = React.createElement(View, { style: styles.unreadDot });
         if (!isUndefined(this.props.readed[id])) {
             unreadDot = React.createElement(View, { style: styles.readDot });
