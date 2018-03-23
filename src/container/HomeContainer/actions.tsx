@@ -12,6 +12,18 @@ export function fetchListSuccess(data: Object) {
 		data,
 	};
 }
+
+
+export function readedItem(id) {
+	return {type: "READED_ITEM", id: id};
+}
+
+export function setReadedItem(id) {
+	return function(dispatch) {
+		dispatch(readedItem(id));
+	};
+}
+
 export function fetchList(url) {
 	return async dispatch => {
 		// dispatch(listIsLoading(true));

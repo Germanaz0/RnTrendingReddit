@@ -41,9 +41,11 @@ describe("list reducer", () => {
         expect(reducer({
             list: [],
             isLoading: false,
+            readed: {},
         }, {
             type: "LIST_IS_LOADING",
             isLoading: false,
+            readed: {},
         })).toEqual({
             list: [],
             isLoading: false,

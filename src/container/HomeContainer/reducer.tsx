@@ -1,6 +1,7 @@
 const initialState = {
 	list: {},
 	isLoading: true,
+	readed: {},
 };
 
 export default function(state = initialState, action) {
@@ -10,6 +11,10 @@ export default function(state = initialState, action) {
 			return {...state, data};
 		case "LIST_IS_LOADING":
 			return {...state, isLoading: action.isLoading};
+		case "READED_ITEM":
+			let readed = state.readed;
+			readed[action.id] = true;
+			return {...state, readed: Object.assign({}, readed)};
 		default:
 			return state;
 	}

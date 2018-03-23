@@ -16,18 +16,20 @@ import {
 } from "native-base";
 import {RefreshControl} from "react-native";
 import moment from "moment";
+import {isUndefined} from "lodash";
 import styles from "./styles";
 
 export interface Props {
 	navigation: any;
 	list: any;
+	readed: any;
 	isLoading: boolean;
 	updateList: Function;
 	fetchListSuccess: Function;
+	setReadedItem: Function;
 }
 
 export interface State {
-
 }
 
 class Home extends Component<Props, State> {
@@ -38,12 +40,12 @@ class Home extends Component<Props, State> {
 
 	removeItem(id) {
 		let data = this.props.list;
-
 		data = data.filter((item) => item.data.id !== id);
 		this.props.fetchListSuccess(data);
 	}
 
 	navigateToItem(item) {
+		this.props.setReadedItem(item.data.id);
 		this.props.navigation.navigate("Profile", item);
 	}
 	renderRow(item) {
@@ -53,6 +55,12 @@ class Home extends Component<Props, State> {
 			thumbnail = `https://www.gravatar.com/avatar/${id}?d=identicon&f=y`;
 		}
 
+		let unreadDot = <View style={styles.unreadDot}/>;
+		if (!isUndefined(this.props.readed[id])) {
+			unreadDot = <View style={styles.readDot}/>;
+		}
+
+
 		return (
 			<ListItem
 				key={id}
@@ -61,7 +69,7 @@ class Home extends Component<Props, State> {
 
 				<Body style={styles.listItemBody}>
 					<View style={{alignItems: "flex-start", flexDirection: "row", justifyContent: "flex-start", flex: 3}}>
-						<View style={styles.unreadDot}/>
+						{unreadDot}
 						<Text style={styles.listItemTitle}>{author}</Text>
 						<Text note style={styles.listTimeText}>{moment.unix(created_utc).fromNow()}</Text>
 					</View>

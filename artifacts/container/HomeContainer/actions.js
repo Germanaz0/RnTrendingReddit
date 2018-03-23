@@ -19,6 +19,14 @@ export function fetchListSuccess(data) {
         data,
     };
 }
+export function readedItem(id) {
+    return { type: "READED_ITEM", id: id };
+}
+export function setReadedItem(id) {
+    return function (dispatch) {
+        dispatch(readedItem(id));
+    };
+}
 export function fetchList(url) {
     return (dispatch) => __awaiter(this, void 0, void 0, function* () {
         // dispatch(listIsLoading(true));

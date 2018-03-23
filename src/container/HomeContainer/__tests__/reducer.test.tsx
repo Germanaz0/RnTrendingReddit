@@ -45,10 +45,12 @@ describe("list reducer", () => {
 				{
 					list: [],
 					isLoading: false,
+					readed: {},
 				},
 				{
 					type: "LIST_IS_LOADING",
 					isLoading: false,
+					readed: {},
 				}
 			)
 		).toEqual({

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Spinner } from "native-base";
 import { connect } from "react-redux";
 import Home from "../../stories/screens/Home";
-import { fetchList, updateList } from "./actions";
+import { fetchList, updateList, setReadedItem } from "./actions";
 import { isEmpty } from "lodash";
 class HomeContainer extends Component {
     fetchPosts() {
@@ -18,17 +18,21 @@ class HomeContainer extends Component {
             this.fetchPosts();
         }
     }
+    markAsRead(id) {
+        this.props.setReadedItem(id);
+    }
     render() {
         if (this.props.isLoading) {
             return (React.createElement(Spinner, null));
         }
         let { children } = this.props.data.data.data;
-        return React.createElement(Home, { fetchListSuccess: (data) => this.updateList(data), navigation: this.props.navigation, updateList: () => this.fetchPosts(), list: children, isLoading: this.props.isLoading });
+        return React.createElement(Home, { fetchListSuccess: (data) => this.updateList(data), navigation: this.props.navigation, updateList: () => this.fetchPosts(), list: children, readed: this.props.readed, setReadedItem: (id) => this.markAsRead(id), isLoading: this.props.isLoading });
     }
 }
 const mapStateToProps = state => ({
     data: state.homeReducer.data,
     isLoading: state.homeReducer.isLoading,
+    readed: state.homeReducer.readed,
 });
-export default connect(mapStateToProps, { fetchList, updateList })(HomeContainer);
+export default connect(mapStateToProps, { fetchList, updateList, setReadedItem })(HomeContainer);
 //# sourceMappingURL=index.js.map

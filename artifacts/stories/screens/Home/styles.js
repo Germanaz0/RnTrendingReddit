@@ -40,6 +40,15 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginTop: 5,
     },
+    readDot: {
+        borderRadius: 50,
+        height: 10,
+        width: 10,
+        backgroundColor: "white",
+        marginRight: 5,
+        marginLeft: 5,
+        marginTop: 5,
+    }
 });
 export default styles;
 //# sourceMappingURL=styles.js.map

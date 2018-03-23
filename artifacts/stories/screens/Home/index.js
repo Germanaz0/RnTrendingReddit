@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Header, Title, Text, Button, Icon, Left, Body, Right, List, ListItem, Thumbnail, View, } from "native-base";
 import { RefreshControl } from "react-native";
 import moment from "moment";
+import { isUndefined } from "lodash";
 import styles from "./styles";
 class Home extends Component {
     refreshList() {
@@ -13,6 +14,7 @@ class Home extends Component {
         this.props.fetchListSuccess(data);
     }
     navigateToItem(item) {
+        this.props.setReadedItem(item.data.id);
         this.props.navigation.navigate("Profile", item);
     }
     renderRow(item) {
@@ -20,11 +22,15 @@ class Home extends Component {
         if (thumbnail === "default" || thumbnail === "nsfw" || thumbnail === "self") {
             thumbnail = `https://www.gravatar.com/avatar/${id}?d=identicon&f=y`;
         }
+        let unreadDot = React.createElement(View, { style: styles.unreadDot });
+        if (!isUndefined(this.props.readed[id])) {
+            unreadDot = React.createElement(View, { style: styles.readDot });
+        }
         return (React.createElement(ListItem, { key: id },
             React.createElement(Thumbnail, { square: true, size: 80, source: { uri: thumbnail } }),
             React.createElement(Body, { style: styles.listItemBody },
                 React.createElement(View, { style: { alignItems: "flex-start", flexDirection: "row", justifyContent: "flex-start", flex: 3 } },
-                    React.createElement(View, { style: styles.unreadDot }),
+                    unreadDot,
                     React.createElement(Text, { style: styles.listItemTitle }, author),
                     React.createElement(Text, { note: true, style: styles.listTimeText }, moment.unix(created_utc).fromNow())),
                 React.createElement(Text, { numberOfLines: 2, ellipsizeMode: "tail" }, title),
