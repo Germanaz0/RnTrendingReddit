@@ -21,6 +21,7 @@ export function fetchListSuccess(data) {
 }
 export function fetchList(url) {
     return (dispatch) => __awaiter(this, void 0, void 0, function* () {
+        // dispatch(listIsLoading(true));
         let list = yield axios.get(url);
         dispatch(fetchListSuccess(list));
         dispatch(listIsLoading(false));

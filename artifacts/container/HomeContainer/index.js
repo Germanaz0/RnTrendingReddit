@@ -5,7 +5,7 @@ import Home from "../../stories/screens/Home";
 import { fetchList } from "./actions";
 class HomeContainer extends Component {
     fetchPosts() {
-        this.props.fetchList(`https://www.reddit.com/top.json`);
+        this.props.fetchList(`https://www.reddit.com/top.json?limit=50`);
     }
     componentDidMount() {
         this.fetchPosts();
@@ -15,7 +15,7 @@ class HomeContainer extends Component {
             return (React.createElement(Spinner, null));
         }
         let { children } = this.props.data.data.data;
-        return React.createElement(Home, { navigation: this.props.navigation, list: children });
+        return React.createElement(Home, { navigation: this.props.navigation, updateList: () => this.fetchPosts(), list: children, isLoading: this.props.isLoading });
     }
 }
 const mapStateToProps = state => ({

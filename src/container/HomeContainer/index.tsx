@@ -12,7 +12,7 @@ export interface Props {
 export interface State {}
 class HomeContainer extends Component<Props, State> {
 	fetchPosts() {
-		this.props.fetchList(`https://www.reddit.com/top.json`);
+		this.props.fetchList(`https://www.reddit.com/top.json?limit=50`);
 	}
 
 	componentDidMount() {
@@ -25,7 +25,7 @@ class HomeContainer extends Component<Props, State> {
 		}
 
 		let {children} = this.props.data.data.data;
-		return <Home navigation={this.props.navigation} list={children} />;
+		return <Home navigation={this.props.navigation} updateList={() => this.fetchPosts()} list={children} isLoading={this.props.isLoading} />;
 	}
 }
 

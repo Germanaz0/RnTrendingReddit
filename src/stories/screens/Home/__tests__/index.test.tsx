@@ -7,6 +7,6 @@ const navigation = { navigate: jest.fn() };
 const list = { map: jest.fn() };
 
 it("renders correctly", () => {
-	const tree = renderer.create(<Home navigation={navigation} list={list} />).toJSON();
+	const tree = renderer.create(<Home navigation={navigation} updateList={() => {console.log('log')}} isLoading={true} list={list} />).toJSON();
 	expect(tree).toMatchSnapshot();
 });
