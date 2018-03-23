@@ -12,7 +12,7 @@ class Home extends React.Component {
                     React.createElement(Title, null, "Top Reddit")),
                 React.createElement(Right, null)),
             React.createElement(Content, null,
-                React.createElement(List, null, this.props.list.map((item, i) => (React.createElement(ListItem, { key: item.data.id },
+                React.createElement(List, null, this.props.list.map((item) => (React.createElement(ListItem, { key: item.data.id },
                     React.createElement(Text, null, item.data.title))))))));
     }
 }

@@ -1,4 +1,4 @@
-package com.reactnativeseed;
+package com.topredditcli;
 
 import android.app.Application;
 
