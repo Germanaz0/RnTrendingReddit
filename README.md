@@ -32,6 +32,3 @@ $ npm install
 		*	Scan the QR code in your Expo app
 	*	Opt #2:
 		*	Run `npm run android` in your terminal
-
-
-For apps with more advance designs, please visit **[NativeBase Market](https://market.nativebase.io/)**.
