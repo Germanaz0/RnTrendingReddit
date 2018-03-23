@@ -27,4 +27,9 @@ export function fetchList(url) {
         dispatch(listIsLoading(false));
     });
 }
+export function updateList(list) {
+    return function (dispatch) {
+        dispatch(fetchListSuccess(list));
+    };
+}
 //# sourceMappingURL=actions.js.map

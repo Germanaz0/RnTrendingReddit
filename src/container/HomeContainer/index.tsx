@@ -2,10 +2,11 @@ import React, {Component} from "react";
 import {Spinner} from "native-base";
 import { connect } from "react-redux";
 import Home from "../../stories/screens/Home";
-import { fetchList } from "./actions";
+import { fetchList, updateList } from "./actions";
 export interface Props {
 	navigation: any;
 	fetchList: Function;
+	updateList: Function;
 	data: any;
 	isLoading: boolean;
 }
@@ -13,6 +14,12 @@ export interface State {}
 class HomeContainer extends Component<Props, State> {
 	fetchPosts() {
 		this.props.fetchList(`https://www.reddit.com/top.json?limit=50`);
+	}
+
+	updateList(data) {
+		let newData = this.props.data;
+		newData.data.data.children = data;
+		this.props.updateList(newData);
 	}
 
 	componentDidMount() {
@@ -25,7 +32,7 @@ class HomeContainer extends Component<Props, State> {
 		}
 
 		let {children} = this.props.data.data.data;
-		return <Home navigation={this.props.navigation} updateList={() => this.fetchPosts()} list={children} isLoading={this.props.isLoading} />;
+		return <Home fetchListSuccess={(data) => this.updateList(data)} navigation={this.props.navigation} updateList={() => this.fetchPosts()} list={children} isLoading={this.props.isLoading} />;
 	}
 }
 
@@ -34,4 +41,4 @@ const mapStateToProps = state => ({
 	isLoading: state.homeReducer.isLoading,
 });
 
-export default connect(mapStateToProps, {fetchList})(HomeContainer);
+export default connect(mapStateToProps, {fetchList, updateList})(HomeContainer);

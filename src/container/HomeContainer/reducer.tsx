@@ -4,17 +4,13 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-	if (action.type === "FETCH_LIST_SUCCESS") {
-		return {
-			...state,
-			data: action.data,
-		};
+	switch(action.type) {
+		case "FETCH_LIST_SUCCESS":
+			let data = Object.assign({}, action.data);
+			return {...state, data};
+		case "LIST_IS_LOADING":
+			return {...state, isLoading: action.isLoading};
+		default:
+			return state;
 	}
-	if (action.type === "LIST_IS_LOADING") {
-		return {
-			...state,
-			isLoading: action.isLoading,
-		};
-	}
-	return state;
 }
