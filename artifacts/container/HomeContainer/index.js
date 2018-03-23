@@ -3,6 +3,7 @@ import { Spinner } from "native-base";
 import { connect } from "react-redux";
 import Home from "../../stories/screens/Home";
 import { fetchList, updateList } from "./actions";
+import { isEmpty } from "lodash";
 class HomeContainer extends Component {
     fetchPosts() {
         this.props.fetchList(`https://www.reddit.com/top.json?limit=50`);
@@ -13,7 +14,9 @@ class HomeContainer extends Component {
         this.props.updateList(newData);
     }
     componentDidMount() {
-        this.fetchPosts();
+        if (isEmpty(this.props.data)) {
+            this.fetchPosts();
+        }
     }
     render() {
         if (this.props.isLoading) {

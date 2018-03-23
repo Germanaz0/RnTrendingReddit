@@ -4,10 +4,6 @@ import { RefreshControl } from "react-native";
 import moment from "moment";
 import styles from "./styles";
 class Home extends Component {
-    constructor() {
-        super(...arguments);
-        this.state = { isRefreshing: false };
-    }
     refreshList() {
         this.props.updateList();
     }
@@ -16,8 +12,8 @@ class Home extends Component {
         data = data.filter((item) => item.data.id !== id);
         this.props.fetchListSuccess(data);
     }
-    navigateToItem(id) {
-        console.warn("Navigating to item", id);
+    navigateToItem(item) {
+        this.props.navigation.navigate("Profile", item);
     }
     renderRow(item) {
         let { thumbnail, author, title, id, created_utc, num_comments } = item.data;
@@ -27,19 +23,19 @@ class Home extends Component {
         return (React.createElement(ListItem, { key: id },
             React.createElement(Thumbnail, { square: true, size: 80, source: { uri: thumbnail } }),
             React.createElement(Body, { style: styles.listItemBody },
-                React.createElement(View, { style: { alignItems: "flex-start", flexDirection: "row", justifyContent: "flex-start", flex: 1 } },
+                React.createElement(View, { style: { alignItems: "flex-start", flexDirection: "row", justifyContent: "flex-start", flex: 3 } },
                     React.createElement(View, { style: styles.unreadDot }),
                     React.createElement(Text, { style: styles.listItemTitle }, author),
                     React.createElement(Text, { note: true, style: styles.listTimeText }, moment.unix(created_utc).fromNow())),
                 React.createElement(Text, { numberOfLines: 2, ellipsizeMode: "tail" }, title),
-                React.createElement(View, { style: { alignItems: "flex-start", flexDirection: "row", justifyContent: "space-between", flex: 1, marginLeft: 0 } },
+                React.createElement(View, { style: { alignItems: "flex-start", flexDirection: "row", justifyContent: "space-between", flex: 2, marginLeft: 0 } },
                     React.createElement(Button, { transparent: true, danger: true, small: true, onPress: () => this.removeItem(id) },
                         React.createElement(Icon, { name: "trash" })),
                     React.createElement(Text, { style: styles.listItemComments, note: true },
                         num_comments,
                         " Comments"))),
             React.createElement(Right, null,
-                React.createElement(Icon, { name: "ios-arrow-forward", onPress: () => this.navigateToItem(id) }))));
+                React.createElement(Icon, { name: "ios-arrow-forward", onPress: () => this.navigateToItem(item) }))));
     }
     render() {
         let { isLoading } = this.props;

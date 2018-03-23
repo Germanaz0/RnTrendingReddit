@@ -31,7 +31,6 @@ export interface State {
 }
 
 class Home extends Component<Props, State> {
-	state = {isRefreshing: false};
 
 	refreshList() {
 		this.props.updateList();
@@ -44,8 +43,8 @@ class Home extends Component<Props, State> {
 		this.props.fetchListSuccess(data);
 	}
 
-	navigateToItem(id) {
-		console.warn("Navigating to item", id);
+	navigateToItem(item) {
+		this.props.navigation.navigate("Profile", item);
 	}
 	renderRow(item) {
 		let {thumbnail, author, title, id, created_utc, num_comments} =  item.data;
@@ -61,13 +60,13 @@ class Home extends Component<Props, State> {
 				<Thumbnail square size={80} source={{uri: thumbnail}}/>
 
 				<Body style={styles.listItemBody}>
-					<View style={{alignItems: "flex-start", flexDirection: "row", justifyContent: "flex-start", flex: 1}}>
+					<View style={{alignItems: "flex-start", flexDirection: "row", justifyContent: "flex-start", flex: 3}}>
 						<View style={styles.unreadDot}/>
 						<Text style={styles.listItemTitle}>{author}</Text>
 						<Text note style={styles.listTimeText}>{moment.unix(created_utc).fromNow()}</Text>
 					</View>
 					<Text numberOfLines={2} ellipsizeMode="tail">{title}</Text>
-					<View style={{alignItems: "flex-start", flexDirection: "row", justifyContent: "space-between", flex: 1, marginLeft: 0}}>
+					<View style={{alignItems: "flex-start", flexDirection: "row", justifyContent: "space-between", flex: 2, marginLeft: 0}}>
 						<Button transparent danger small onPress={() => this.removeItem(id)}>
 							<Icon name="trash" />
 						</Button>
@@ -76,7 +75,7 @@ class Home extends Component<Props, State> {
 				</Body>
 
 				<Right>
-					<Icon name="ios-arrow-forward" onPress={() => this.navigateToItem(id)} />
+					<Icon name="ios-arrow-forward" onPress={() => this.navigateToItem(item)} />
 				</Right>
 			</ListItem>
 		);

@@ -3,6 +3,8 @@ import {Spinner} from "native-base";
 import { connect } from "react-redux";
 import Home from "../../stories/screens/Home";
 import { fetchList, updateList } from "./actions";
+import {isEmpty} from "lodash";
+
 export interface Props {
 	navigation: any;
 	fetchList: Function;
@@ -23,7 +25,10 @@ class HomeContainer extends Component<Props, State> {
 	}
 
 	componentDidMount() {
-		this.fetchPosts();
+		if (isEmpty(this.props.data)) {
+			this.fetchPosts();
+		}
+
 	}
 
 	render() {
@@ -32,7 +37,11 @@ class HomeContainer extends Component<Props, State> {
 		}
 
 		let {children} = this.props.data.data.data;
-		return <Home fetchListSuccess={(data) => this.updateList(data)} navigation={this.props.navigation} updateList={() => this.fetchPosts()} list={children} isLoading={this.props.isLoading} />;
+		return <Home
+			fetchListSuccess={(data) => this.updateList(data)}
+			navigation={this.props.navigation} updateList={() => this.fetchPosts()}
+			list={children}
+			isLoading={this.props.isLoading} />;
 	}
 }
 
