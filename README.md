@@ -8,9 +8,9 @@ Simple reddit client written in React Native to use as example.
 On the command prompt run the following commands
 
 ```sh
-$ git clone https://github.com/GeekyAnts/react-native-boilerplate-redux-typescript.git
+$ git clone https://github.com/Germanaz0/RnTrendingReddit.git
 
-$ cd react-native-boilerplate-redux-typescript/
+$ cd RnTrendingReddit/
 
 $ npm install
   or
