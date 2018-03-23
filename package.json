@@ -61,6 +61,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "lodash": "4.17.4",
+    "moment": "^2.21.0",
     "native-base": "2.3.5",
     "react": "16.2.0",
     "react-native": "0.51.0",

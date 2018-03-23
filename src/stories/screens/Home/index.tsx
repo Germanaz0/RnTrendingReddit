@@ -14,6 +14,7 @@ import {
 	Thumbnail,
 } from "native-base";
 import {RefreshControl} from "react-native";
+import moment from "moment";
 
 import styles from "./styles";
 
@@ -36,7 +37,7 @@ class Home extends React.Component<Props, State> {
 	}
 
 	renderRow = (item) => {
-		let {thumbnail, author, title, id} =  item.data;
+		let {thumbnail, author, title, id, created_utc} =  item.data;
 
 		if (thumbnail === "default" || thumbnail === "nsfw" || thumbnail === "self") {
 			thumbnail = `https://www.gravatar.com/avatar/${id}?d=identicon&f=y`;
@@ -50,7 +51,7 @@ class Home extends React.Component<Props, State> {
 
 				<Body style={{alignItems: "flex-start", flex: 1}}>
 
-				<Text>{author} - <Text note>19 min ago</Text></Text>
+				<Text style={{fontWeight: "bold"}}>{author} <Text style={{fontWeight: "normal"}} note> - {moment.unix(created_utc).fromNow()}</Text></Text>
 				<Text numberOfLines={2} ellipsizeMode="tail">{title}</Text>
 				</Body>
 				<Right>
