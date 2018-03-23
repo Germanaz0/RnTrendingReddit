@@ -12,6 +12,7 @@ import {
 	List,
 	ListItem,
 	Thumbnail,
+	View,
 } from "native-base";
 import {RefreshControl} from "react-native";
 import moment from "moment";
@@ -37,7 +38,7 @@ class Home extends React.Component<Props, State> {
 	}
 
 	renderRow = (item) => {
-		let {thumbnail, author, title, id, created_utc} =  item.data;
+		let {thumbnail, author, title, id, created_utc, num_comments} =  item.data;
 
 		if (thumbnail === "default" || thumbnail === "nsfw" || thumbnail === "self") {
 			thumbnail = `https://www.gravatar.com/avatar/${id}?d=identicon&f=y`;
@@ -49,10 +50,14 @@ class Home extends React.Component<Props, State> {
 			>
 				<Thumbnail square size={80} source={{uri: thumbnail}}/>
 
-				<Body style={{alignItems: "flex-start", flex: 1}}>
-
-				<Text style={{fontWeight: "bold"}}>{author} <Text style={{fontWeight: "normal"}} note> - {moment.unix(created_utc).fromNow()}</Text></Text>
-				<Text numberOfLines={2} ellipsizeMode="tail">{title}</Text>
+				<Body style={styles.listItemBody}>
+					<View style={{alignItems: "flex-start", flexDirection: "row", justifyContent: "flex-start", flex: 1}}>
+						<View style={styles.unreadDot}/>
+						<Text style={styles.listItemTitle}>{author}</Text>
+						<Text note style={styles.listTimeText}>{moment.unix(created_utc).fromNow()}</Text>
+					</View>
+					<Text numberOfLines={2} ellipsizeMode="tail">{title}</Text>
+					<Text style={styles.listItemComments} note>{num_comments} Comments</Text>
 				</Body>
 				<Right>
 					<Icon name="ios-arrow-forward" />
@@ -86,7 +91,6 @@ class Home extends React.Component<Props, State> {
 														onRefresh={this.refreshList.bind(this)}
 						/>
 					}
-
 								dataArray={this.props.list}
 								renderRow={(item) => this.renderRow(item)}
 					>
