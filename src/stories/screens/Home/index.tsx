@@ -36,16 +36,22 @@ class Home extends React.Component<Props, State> {
 	}
 
 	renderRow = (item) => {
+		let {thumbnail, author, title} =  item.data;
+
+		if (thumbnail === "default") {
+			thumbnail = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y";
+		}
+
 		return (
 			<ListItem
 				key={item.data.id}
 			>
-				<Thumbnail square size={80} source={{uri: item.data.thumbnail}}/>
+				<Thumbnail square size={80} source={{uri: thumbnail}}/>
 
-				<Body>
+				<Body style={{alignItems: "flex-start", flex: 1}}>
 
-				<Text>{item.data.author} - <Text note>19 min ago</Text></Text>
-				<Text>{item.data.title}</Text>
+				<Text>{author} - <Text note>19 min ago</Text></Text>
+				<Text>{title}</Text>
 				</Body>
 				<Right>
 					<Text note>View</Text>

@@ -7,14 +7,18 @@ class Home extends React.Component {
         super(...arguments);
         this.state = { isRefreshing: false };
         this.renderRow = (item) => {
+            let { thumbnail, author, title } = item.data;
+            if (thumbnail === "default") {
+                thumbnail = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y";
+            }
             return (React.createElement(ListItem, { key: item.data.id },
-                React.createElement(Thumbnail, { square: true, size: 80, source: { uri: item.data.thumbnail } }),
-                React.createElement(Body, null,
+                React.createElement(Thumbnail, { square: true, size: 80, source: { uri: thumbnail } }),
+                React.createElement(Body, { style: { alignItems: "flex-start", flex: 1 } },
                     React.createElement(Text, null,
-                        item.data.author,
+                        author,
                         " - ",
                         React.createElement(Text, { note: true }, "19 min ago")),
-                    React.createElement(Text, null, item.data.title)),
+                    React.createElement(Text, null, title)),
                 React.createElement(Right, null,
                     React.createElement(Text, { note: true }, "View"))));
         };
