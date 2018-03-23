@@ -7,20 +7,20 @@ class Home extends React.Component {
         super(...arguments);
         this.state = { isRefreshing: false };
         this.renderRow = (item) => {
-            let { thumbnail, author, title } = item.data;
-            if (thumbnail === "default") {
-                thumbnail = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y";
+            let { thumbnail, author, title, id } = item.data;
+            if (thumbnail === "default" || thumbnail === "nsfw" || thumbnail === "self") {
+                thumbnail = `https://www.gravatar.com/avatar/${id}?d=identicon&f=y`;
             }
-            return (React.createElement(ListItem, { key: item.data.id },
+            return (React.createElement(ListItem, { key: id },
                 React.createElement(Thumbnail, { square: true, size: 80, source: { uri: thumbnail } }),
                 React.createElement(Body, { style: { alignItems: "flex-start", flex: 1 } },
                     React.createElement(Text, null,
                         author,
                         " - ",
                         React.createElement(Text, { note: true }, "19 min ago")),
-                    React.createElement(Text, null, title)),
+                    React.createElement(Text, { numberOfLines: 2, ellipsizeMode: "tail" }, title)),
                 React.createElement(Right, null,
-                    React.createElement(Text, { note: true }, "View"))));
+                    React.createElement(Icon, { name: "ios-arrow-forward" }))));
         };
     }
     refreshList() {
