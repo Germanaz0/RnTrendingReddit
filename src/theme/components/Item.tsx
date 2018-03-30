@@ -152,7 +152,7 @@ export default (variables = variable) => {
 				color: variables.inputSuccessBorderColor,
 			},
 			".rounded": {
-				borderRadius: 30,
+        borderRadius: 30,
 				borderColor: variables.inputSuccessBorderColor,
 			},
 			".regular": {

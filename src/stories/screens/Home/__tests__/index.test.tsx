@@ -7,16 +7,16 @@ const navigation = {navigate: jest.fn()};
 const list = {map: jest.fn()};
 
 it("renders correctly", () => {
-    const tree = renderer.create(
-        <Home fetchListSuccess={() => console.log("Log")}
-              navigation={navigation}
-              readed={{}}
-              updateList={() => {
-                  console.log("log")
-              }}
-              setReadedItem={() => {
-                  console.log("log")
-              }}
-              isLoading={true} list={list}/>).toJSON();
-    expect(tree).toMatchSnapshot();
+  const tree = renderer.create(
+    <Home fetchListSuccess={() => console.log("Log")}
+          navigation={navigation}
+          readed={{}}
+          updateList={() => {
+            console.log("log")
+          }}
+          setReadedItem={() => {
+            console.log("log")
+          }}
+          isLoading={true} list={list}/>).toJSON();
+  expect(tree).toMatchSnapshot();
 });

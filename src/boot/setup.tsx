@@ -11,26 +11,26 @@ export interface Props {
 }
 
 export interface State {
-    store: Object;
-    isLoading: boolean;
+  store: Object;
+  isLoading: boolean;
 }
 
 export default class Setup extends React.Component<Props, State> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoading: false,
-            store: configureStore(() => this.setState({isLoading: false}))
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+      store: configureStore(() => this.setState({isLoading: false}))
+    };
+  }
 
-    render() {
-        return (
-            <StyleProvider style={getTheme(variables)}>
-                <Provider store={this.state.store}>
-                    <App/>
-                </Provider>
-            </StyleProvider>
-        );
-    }
+  render() {
+    return (
+      <StyleProvider style={getTheme(variables)}>
+        <Provider store={this.state.store}>
+          <App/>
+        </Provider>
+      </StyleProvider>
+    );
+  }
 }

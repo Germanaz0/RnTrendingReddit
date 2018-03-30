@@ -3,48 +3,48 @@ import {Text, Container, List, ListItem, Content} from "native-base";
 import {NavigationActions} from "react-navigation";
 
 const routes = [
-    {
-        route: "Home",
-        caption: "Home",
-    },
+  {
+    route: "Home",
+    caption: "Home",
+  },
 ];
 
 export interface Props {
-    navigation: any;
+  navigation: any;
 }
 
 export interface State {
 }
 
 const resetAction = NavigationActions.reset({
-    index: 0,
-    actions: [NavigationActions.navigate({routeName: "Login"})],
+  index: 0,
+  actions: [NavigationActions.navigate({routeName: "Login"})],
 });
 export default class Sidebar extends Component<Props, State> {
-    render() {
-        return (
-            <Container>
-                <Content>
-                    <List
-                        style={{marginTop: 40}}
-                        dataArray={routes}
-                        renderRow={data => {
-                            return (
-                                <ListItem
-                                    button
-                                    onPress={() => {
-                                        data.route === "Login"
-                                            ? this.props.navigation.dispatch(resetAction)
-                                            : this.props.navigation.navigate(data.route);
-                                    }}
-                                >
-                                    <Text>{data.caption}</Text>
-                                </ListItem>
-                            );
-                        }}
-                    />
-                </Content>
-            </Container>
-        );
-    }
+  render() {
+    return (
+      <Container>
+        <Content>
+          <List
+            style={{marginTop: 40}}
+            dataArray={routes}
+            renderRow={data => {
+              return (
+                <ListItem
+                  button
+                  onPress={() => {
+                    data.route === "Login"
+                      ? this.props.navigation.dispatch(resetAction)
+                      : this.props.navigation.navigate(data.route);
+                  }}
+                >
+                  <Text>{data.caption}</Text>
+                </ListItem>
+              );
+            }}
+          />
+        </Content>
+      </Container>
+    );
+  }
 }
